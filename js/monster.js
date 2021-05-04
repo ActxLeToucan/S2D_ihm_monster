@@ -36,6 +36,8 @@ function go() {
     setInterval(() => {
         hasard();
     }, FREQUENCE);
+    buttonKill.addEventListener("click", () => kill());
+    buttonNewLife.addEventListener("click", () => newLife());
 }
 
 
@@ -79,6 +81,7 @@ function displayStatus() {
 }
 
 
+/* ACTIONS */
 function run() {
     // perte de 1 point de vie
     action("Le monstre court. Il perd 1 PV.", -1, 0);
@@ -122,17 +125,54 @@ function action(msgAction, dPV, dUA) {
 }
 
 function sleep() {
-    AWAKE = false;
-    log("Le monstre s'endort.");
-    showme();
-    displayStatus();
-    setTimeout(() => {
-        AWAKE = true;
-        log("Le monstre se réveille.");
+    if (AWAKE && LIFE > 0) {
+        AWAKE = false;
+        log("Le monstre s'endort.");
         showme();
         displayStatus();
-    }, 7000);
+        setTimeout(() => {
+            AWAKE = true;
+            log("Le monstre se réveille.");
+            showme();
+            displayStatus();
+        }, 7000);
+    } else if (!AWAKE) {
+        log("ACTION IMPOSSIBLE : Le monstre dort déjà.");
+    } else {
+        log("ACTION IMPOSSIBLE : Le monstre est mort");
+    }
 }
+
+
+function kill() {
+    let msg;
+    if (LIFE > 0) {
+        LIFE = 0;
+        MONEY = 0;
+        msg = "Le monstre se fait tuer.";
+    } else {
+        msg = "ACTION IMPOSSIBLE : Le monstre est déjà mort."
+    }
+    log(msg);
+    showme();
+    displayStatus();
+}
+
+function newLife() {
+    let msg;
+    if (LIFE <= 0) {
+        LIFE = 25;
+        MONEY = 15;
+        msg = "Le monstre est un phénix, il renaît de ses cendres !";
+    } else {
+        msg = "ACTION IMPOSSIBLE : Le monstre ne peut pas renaître s'il n'est pas mort."
+    }
+    log(msg);
+    showme();
+    displayStatus();
+}
+
+
 
 function hasard() {
     let nb = Math.floor((Math.random() * 5));
@@ -154,3 +194,4 @@ function hasard() {
             break;
     }
 }
+
