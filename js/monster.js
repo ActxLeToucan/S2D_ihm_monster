@@ -7,7 +7,7 @@ let LIFE;
 let MONEY;
 let AWAKE = true;
 
-let texteMonster = document.getElementById('monster');
+let boiteMonster = document.getElementById('monster');
 let actionBox = document.getElementById('actionbox');
 
 let buttonNewLife = document.getElementById("b1");
@@ -38,6 +38,7 @@ function go() {
     }, FREQUENCE);
     buttonKill.addEventListener("click", () => kill());
     buttonNewLife.addEventListener("click", () => newLife());
+    displayStatus();
 }
 
 
@@ -78,6 +79,21 @@ function displayStatus() {
     liste[1].textContent = `Money : ${MONEY}`;
     if (AWAKE) liste[2].textContent = `Awake`;
     else liste[2].textContent = `Asleep`;
+
+    let color;
+    if (LIFE < 5) color = "red";
+    else if (LIFE < 10) color = "orange";
+    else if (LIFE < 15) color = "yellow";
+    else color = "green";
+    boiteMonster.style.backgroundColor = color;
+
+    let border;
+    if (MONEY < 10) border = "0px";
+    else if (MONEY < 25) border = "thin";
+    else if (MONEY < 50) border = "medium";
+    else border = "thick";
+    boiteMonster.style.borderStyle = "solid";
+    boiteMonster.style.borderWidth = border;
 }
 
 
@@ -165,7 +181,7 @@ function newLife() {
         MONEY = 15;
         msg = "Le monstre est un phénix, il renaît de ses cendres !";
     } else {
-        msg = "ACTION IMPOSSIBLE : Le monstre ne peut pas renaître s'il n'est pas mort."
+        msg = "ACTION IMPOSSIBLE : Le monstre ne peut pas renaître s'il n'est pas mort.";
     }
     log(msg);
     showme();
