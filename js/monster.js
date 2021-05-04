@@ -5,6 +5,9 @@ let LIFE;
 let MONEY;
 let AWAKE = true;
 
+let texteMonster = document.getElementById('monster');
+let actionBox = document.getElementById('actionbox');
+
 let buttonNewLife = document.getElementById("b1");
 let buttonRun = document.getElementById("b2");
 let buttonFight = document.getElementById("b3");
@@ -33,4 +36,21 @@ function init(n, l, m) {
 
 function showme(){
     window.alert(`Nom : ${NAME}  Vie : ${LIFE} Argent: ${MONEY} Reveillé : ${AWAKE}` );
+}
+
+function log(message) {
+    // creation de l'enfant
+    let child = document.createElement("p");
+    let content = document.createTextNode(message);
+    child.appendChild(content);
+
+    // on decale si ce n'est pas le 1er element
+    if (actionBox.childElementCount !== 0) {
+        let oldFirstChild = actionBox.firstElementChild;
+        actionBox.insertBefore(child, oldFirstChild);
+    }
+    // sinon on ajoute
+    else {
+        actionBox.appendChild(child);
+    }
 }
