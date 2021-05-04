@@ -1,5 +1,7 @@
 'use strict'
 
+const FREQUENCE = 12000;
+
 let NAME;
 let LIFE;
 let MONEY;
@@ -30,8 +32,10 @@ function go() {
     buttonFight.addEventListener("click", () => fight());
     buttonEat.addEventListener("click", () => eat());
     buttonWork.addEventListener("click", () => work());
-    
-
+    buttonSleep.addEventListener("click", () => sleep());
+    setInterval(() => {
+        hasard();
+    }, FREQUENCE);
 }
 
 
@@ -115,4 +119,38 @@ function action(msgAction, dPV, dUA) {
     log(msg);
     showme();
     displayStatus();
+}
+
+function sleep() {
+    AWAKE = false;
+    log("Le monstre s'endort.");
+    showme();
+    displayStatus();
+    setTimeout(() => {
+        AWAKE = true;
+        log("Le monstre se réveille.");
+        showme();
+        displayStatus();
+    }, 7000);
+}
+
+function hasard() {
+    let nb = Math.floor((Math.random() * 5));
+    switch (nb) {
+        case 0:
+            run();
+            break;
+        case 1:
+            fight();
+            break;
+        case 2:
+            work();
+            break;
+        case 3:
+            sleep();
+            break;
+        case 4:
+            eat();
+            break;
+    }
 }
