@@ -56,7 +56,7 @@ function init(n, l, m) {
 
 
 function showme(){
-    log(`Nom : ${NAME}  Vie : ${LIFE} Argent: ${MONEY} Reveillé : ${AWAKE}` );
+    log(`Nom : ${NAME} | Vie : ${LIFE} | Argent: ${MONEY} | Reveillé : ${AWAKE}` );
     //displayStatus();
 }
 
