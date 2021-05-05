@@ -1,33 +1,122 @@
-.monster {
-    display: inline-block;
-    vertical-align: top;
-    height: 100px;
-    margin-left: 50px;
+body {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 0px;
+    grid-template-rows: auto 120px auto auto auto auto auto;
+    width: 100%;
+}
 
+html{
+        display: flex;
+        flex-flow: row nowrap;  
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        height:100%;
+        margin: 0;
+        padding: 0;
+        background:#e1e1e1;
+    }
+
+body>h1 {
+    grid-column: 1/3;
+    grid-row: 1/2;
 }
 
 #monster {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin: auto 0px auto auto;
     border-radius: 5px;
     background-color: orange;
     width: 100px;
 }
 
 #actionbox {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin: auto auto auto 0px;
     border: 1px solid grey;
     width: 500px;
     overflow: auto;
+    background-color: white;
+}
+
+#status {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    justify-content: center;
+}
+body>hr:nth-of-type(1n) {
+    grid-row: 4/5;
+}
+
+body>hr:nth-of-type(2n) {
+    grid-row: 6/7;
+}
+
+body>hr {
+    grid-column: 1/3;
+    width: 60%;
+}
+
+#vie {
+    grid-column: 1/3;
+    grid-row: 7/8;
+}
+
+#actions {
+    grid-column: 1/3;
+    grid-row: 5/6;
+}
+
+.boutons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#b2 {
+    order:1;
+}
+
+#b3 {
+    order:2;
+}
+
+#b7 {
+    order:3;
+}
+
+#b5 {
+    order:4;
+}
+
+#b4 {
+    order:5;
+}
+
+#b6 {
+    order:6;
+}
+
+h1 {
+    text-align: center;
+}
+
+.monster {
+    display: inline-block;
+    height: 100px;
 }
 
 #actionbox > p {
     margin: 0 ;
-}
-
-ul#status {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 ul#status li {
@@ -44,4 +133,28 @@ button {
 
 button:hover {
     background-color: dodgerblue;
+}
+
+#k {
+    background-color: darkred;
+    color: white;
+}
+#b1 {
+    background-color: darkgreen;
+    color: white;
+}
+
+#k:hover {
+    background-color: red;
+}
+#b1:hover {
+    background-color: rgb(0, 167, 0);
+}
+
+li:nth-of-type(2):after {
+    content: " 💰";
+}
+
+* {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }

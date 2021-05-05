@@ -8,6 +8,8 @@ let MONEY;
 let AWAKE = true;
 
 let boiteMonster = document.getElementById('monster');
+let img = document.createElement("img");
+let txt = boiteMonster.firstElementChild;
 let actionBox = document.getElementById('actionbox');
 
 let buttonNewLife = document.getElementById("b1");
@@ -26,7 +28,7 @@ window.addEventListener("load", () => go());
 
 
 function go() {
-    init("Wilfrid", 25, 100);
+    init(getName(), 25, 100);
     buttonShow.addEventListener("click", () => showme());
     buttonRun.addEventListener("click", () => run());
     buttonFight.addEventListener("click", () => fight());
@@ -39,6 +41,8 @@ function go() {
     buttonKill.addEventListener("click", () => kill());
     buttonNewLife.addEventListener("click", () => newLife());
     displayStatus();
+    boiteMonster.insertBefore(img, txt);
+    style();
 }
 
 
@@ -75,16 +79,24 @@ function log(message) {
 
 // passer en parametre des varriables globales ca sert à rien, donc on n'a pas mis de parametres a cette fonction
 function displayStatus() {
-    liste[0].textContent = `Life : ${LIFE}`;
     liste[1].textContent = `Money : ${MONEY}`;
-    if (AWAKE) liste[2].textContent = `Awake`;
-    else liste[2].textContent = `Asleep`;
+    if (AWAKE) liste[2].textContent = `Awake 😊`;
+    else liste[2].textContent = `Asleep 💤`;
 
     let color;
-    if (LIFE < 5) color = "red";
-    else if (LIFE < 10) color = "orange";
-    else if (LIFE < 15) color = "yellow";
-    else color = "green";
+    if (LIFE < 5) {
+        color = "red";
+        liste[0].textContent = `Life : ${LIFE} 💖`;
+    } else if (LIFE < 10) {
+        color = "orange";
+        liste[0].textContent = `Life : ${LIFE} 🧡`;
+    } else if (LIFE < 15) {
+        color = "yellow";
+        liste[0].textContent = `Life : ${LIFE} 💛`;
+    } else {
+        color = "green"; 
+        liste[0].textContent = `Life : ${LIFE} 💚`;
+    }
     boiteMonster.style.backgroundColor = color;
 
     let border;
@@ -94,6 +106,8 @@ function displayStatus() {
     else border = "thick";
     boiteMonster.style.borderStyle = "solid";
     boiteMonster.style.borderWidth = border;
+
+    rip();
 }
 
 
@@ -180,6 +194,7 @@ function newLife() {
         LIFE = 25;
         MONEY = 15;
         msg = "Le monstre est un phénix, il renaît de ses cendres !";
+        style();
     } else {
         msg = "ACTION IMPOSSIBLE : Le monstre ne peut pas renaître s'il n'est pas mort.";
     }
@@ -211,3 +226,34 @@ function hasard() {
     }
 }
 
+// Améliorations
+function style() {
+    let alea = Math.floor((Math.random() * 6)) +1;
+    img.src = `./images/${alea}.png`
+    img.style.width = "75px";
+    img.style.filter = "drop-shadow(0px 0px 5px #FFFFFF)"
+
+    img.style.marginTop = "3px";
+    img.style.padding = "0px";
+    img.style.display = "block";
+    img.style.marginLeft = "auto";
+    img.style.marginRight = "auto";
+
+    txt.style.textShadow = "0px 0px 5px #FFFFFF"
+    txt.style.margin = "0px";
+    txt.style.padding = "2px 0px 0px 0px";
+    txt.style.textAlign = "center";
+    txt.innerHTML = NAME;
+}
+
+function getName() {
+    let tab = ["Wilfrid", "Godzilla", "Bubble", "Enzox", "Cyclopemyope", "Kebab", "Garfieldus", "Zbelele", "Boo", "Yeti", "FlipBrain"]
+    let nb = Math.floor((Math.random() * tab.length));
+    return tab[nb];
+}
+
+function rip() {
+    if (LIFE <= 0) {
+        img.src = "./images/rip.png";
+    }
+}
