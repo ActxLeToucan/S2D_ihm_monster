@@ -228,6 +228,12 @@ function hasard() {
 
 // Améliorations
 function style() {
+    let favicon = document.createElement('link');
+    favicon.setAttribute('rel','shortcut icon');
+    favicon.setAttribute('href','./images/favicon.png');
+    document.querySelector('head').appendChild(favicon);
+
+
     let alea = Math.floor((Math.random() * 6)) +1;
     img.src = `./images/${alea}.png`
     img.style.width = "75px";
